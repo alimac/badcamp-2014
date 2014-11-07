@@ -15,7 +15,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'" 
   config.vm.provision "shell" do |s|
     s.privileged = false 
-    s.path = "drupal-8.sh"
+    s.path = "provision.sh"
     s.args = [ "badcamp" ]
   end
 
