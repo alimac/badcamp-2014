@@ -5,31 +5,32 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "hashicorp/precise64"
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'" 
   config.vm.network "private_network", type: "dhcp" 
-  config.vm.synced_folder "../www-shared", "/var/www/html", type: "nfs"
 
   config.vm.define "d8" do |d8|
-
+    config.vm.hostname = "d8.dev"
+    config.vm.synced_folder "www-d8", "/var/www/html", type: "nfs"
     config.vm.provider "virtualbox" do |vb|
-      vb.customize ["modifyvm", :id, "--memory", "1024"]
+      vb.memory = "1024"
     end
   
     config.vm.provision "shell" do |s|
       s.privileged = false 
-      s.path = "../drupal-8/provision.sh"
+      s.path = "d8-provision.sh"
       s.args = [ "badcamp" ]
     end
   end
 
-  config.vm.define "d7" do |d8|
-
+  config.vm.define "d7" do |d7|
+    config.vm.hostname = "d7.dev"
+    config.vm.synced_folder "www-d7", "/var/www", type: "nfs"
     config.vm.provider "virtualbox" do |vb|
-      vb.customize ["modifyvm", :id, "--memory", "1024"]
+      vb.memory = "1024"
     end
 
     config.vm.provision "shell" do |s|
       s.privileged = false
-      s.path = "../drupal-7/provision.sh"
-      s.args = [ "badcamp" ]
+      s.path = "d7-provision.sh"
+      s.args = [ "badcamp", "BADCamp 2014" ]
     end
   end
 end

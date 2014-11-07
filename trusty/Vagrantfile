@@ -1,0 +1,21 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.box = "ubuntu/trusty64"
+  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'" 
+  config.vm.network "private_network", type: "dhcp" 
+  config.vm.synced_folder "www", "/var/www/html", type: "nfs"
+  config.vm.hostname = "trusty-d8.dev"
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "1024"
+    vb.name = "trusty-d8"
+  end
+  
+  config.vm.provision "shell" do |s|
+    s.privileged = false 
+    s.path = "d8-provision.sh"
+    s.args = [ "badcamp", "BADCamp 2014" ]
+  end
+end
