@@ -14,7 +14,7 @@ sudo apt-get install apache2 apache2-mpm-prefork -y
 # Enable mod_rewrite:
 sudo a2enmod rewrite
 
-# AllowOverride must be set to All to enable .htacess
+# AllowOverride must be set to All to enable .htaccess
 sudo cat <<EOF > /tmp/000-default.conf
 <VirtualHost *:80>
   DocumentRoot /var/www/html
