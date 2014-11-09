@@ -55,7 +55,7 @@ sudo rm -rf *
 sudo rm -rf .* 2> /dev/null
 
 # Clone the latest Drupal 8:
-git clone --branch 8.0.x http://git.drupal.org/project/drupal.git html
+git clone --branch 8.0.x http://git.drupal.org/project/drupal.git .
 
 # Use Drush to install Drupal 8:
 cd html 
