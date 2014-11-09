@@ -48,9 +48,13 @@ source $HOME/.bashrc
 # Install Drush using Composer:
 composer global require drush/drush:dev-master
 
+# Clear the web root directory
+cd /var/www/html
+sudo chmod -R u+w .
+sudo rm -rf *
+sudo rm -rf .* 2> /dev/null
+
 # Clone the latest Drupal 8:
-cd /var/www
-sudo rm -rf html 
 git clone --branch 8.0.x http://git.drupal.org/project/drupal.git html
 
 # Use Drush to install Drupal 8:

@@ -1,4 +1,6 @@
 VAGRANTFILE_API_VERSION = "2"
+SITE_NAME = "BADCamp 2014"
+MYSQL_PASSWORD = "badcamp"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
@@ -16,7 +18,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provision "shell" do |s|
       s.privileged = false 
       s.path = "d8-provision.sh"
-      s.args = [ "badcamp" ]
+      s.args = [ MYSQL_PASSWORD, SITE_NAME ]
     end
   end
 
@@ -30,7 +32,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provision "shell" do |s|
       s.privileged = false
       s.path = "d7-provision.sh"
-      s.args = [ "badcamp", "BADCamp 2014" ]
+      s.args = [ MYSQL_PASSWORD, SITE_NAME ]
     end
   end
 end

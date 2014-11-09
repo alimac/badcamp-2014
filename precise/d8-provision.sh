@@ -54,11 +54,13 @@ source $HOME/.bashrc
 composer global require drush/drush:dev-master
 
 # Clear out any existing files from root web directory
-sudo find /var/www -name * -exec rm -f {} \;
+cd /var/www/html
+sudo chmod -R u+w .
+sudo rm -rf *
 
 # Use Drush to download and install Drupal 8:
-drush dl drupal-8 --destination=/var/www --drupal-project-rename=html
-cd /var/www/html
+drush dl drupal-8 --destination=/var/www/html --drupal-project-rename=d8
+cd /var/www/html/d8
 drush site-install --site-name="$2" --account-pass=admin --db-url=mysql://root:$1@localhost/d8 -y
 
 # Restart MySQL and Apache:
@@ -66,4 +68,4 @@ sudo service mysql restart
 sudo service apache2 restart
 
 # Show the IP address this VM is using:
-echo "Your Drupal 8 site is at: http://`ip addr show scope global eth1 | grep inet | cut -d' ' -f6 | cut -d/ -f1`"
+echo "Your Drupal 8 site is at: http://`ip addr show scope global eth1 | grep inet | cut -d' ' -f6 | cut -d/ -f1`/d8"
