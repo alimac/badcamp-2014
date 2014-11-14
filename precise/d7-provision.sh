@@ -37,6 +37,7 @@ source $HOME/.bashrc
 composer global require drush/drush:6.*
 
 # Clear out any existing files from root web directory
+sudo chmod -R u+w /var/www/
 sudo find /var/www -name * -exec rm -f {} \;
 
 # Use Drush to download and install Drupal 7
